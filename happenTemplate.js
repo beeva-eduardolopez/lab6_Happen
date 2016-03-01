@@ -85,8 +85,16 @@ var library = (function () {
         })(),
         Second: (function () {
             return {
-                Second: function () { },
-                DblDigit: function () { }
+                Second: function () {
+                    var date = new Date();
+                    var seconds = date.getSeconds();
+                    return String(seconds);
+                },
+                DblDigit: function () { 
+                     var date = new Date();
+                    var seconds = date.getSeconds();
+                    return seconds < 10 ? '0' + seconds : '' + seconds;
+                }
             }
         })(),
         Minute: (function () {
