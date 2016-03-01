@@ -63,8 +63,17 @@ var library = (function () {
     return {
         TimeStamp: (function () {
             return {
-                UnixTimestamp: function () { },
-                UnixMillisecond: function () { }
+                UnixTimestamp: function () {
+                    var date = new Date();
+                    var unixTSM = String(date.getTime());
+                    return unixTSM.substr(0, unixTSM.length-3);
+                },
+                UnixMillisecond: function () {
+                    var date = new Date();
+                    var unixTSM = date.getTime();
+                    return String(unixTSM);
+
+                }
             }
         })(),
         Local: (function () {
@@ -90,8 +99,8 @@ var library = (function () {
                     var seconds = date.getSeconds();
                     return String(seconds);
                 },
-                DblDigit: function () { 
-                     var date = new Date();
+                DblDigit: function () {
+                    var date = new Date();
                     var seconds = date.getSeconds();
                     return seconds < 10 ? '0' + seconds : '' + seconds;
                 }
