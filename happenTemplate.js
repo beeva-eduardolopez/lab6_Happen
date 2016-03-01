@@ -54,21 +54,29 @@ function addZero(i) {
     return i;
 }
 
+function dateWithSecondsWithOutAMPM() {
+    var d = new Date();
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+    return h + ":" + m + ":" + s ;
+}
+
 function dateWithSeconds() {
     var d = new Date();
     var h = addZero(d.getHours());
     var m = addZero(d.getMinutes());
     var s = addZero(d.getSeconds());
-    var ampm =  (h >= 12) ? "PM" : "AM";
-    return  h + ":" + m + ":" + s +" "+ampm;
+    var ampm = (h >= 12) ? "PM" : "AM";
+    return h + ":" + m + ":" + s + " " + ampm;
 }
 
 function dateWithOutSeconds() {
     var d = new Date();
     var h = addZero(d.getHours());
     var m = addZero(d.getMinutes());
-    var ampm =  (h >= 12) ? "PM" : "AM";
-    return  h + ":" + m +" "+ampm;
+    var ampm = (h >= 12) ? "PM" : "AM";
+    return h + ":" + m + " " + ampm;
 }
 
 Date.prototype.getWeek = function () {
@@ -90,7 +98,7 @@ var library = (function () {
                 UnixTimestamp: function () {
                     var date = new Date();
                     var unixTSM = String(date.getTime());
-                    return unixTSM.substr(0, unixTSM.length-3);
+                    return unixTSM.substr(0, unixTSM.length - 3);
                 },
                 UnixMillisecond: function () {
                     var date = new Date();
@@ -104,12 +112,12 @@ var library = (function () {
             return {
                 Time: (function () {
                     return {
-                        WithSeconds: function () { 
+                        WithSeconds: function () {
                             var date = new Date();
                             var dateWS = dateWithSeconds(date);
                             return String(dateWS);
                         },
-                        WithOutSeconds: function () { 
+                        WithOutSeconds: function () {
                             var date = new Date();
                             var dateWOS = dateWithOutSeconds(date);
                             return String(dateWOS);
@@ -118,23 +126,23 @@ var library = (function () {
                 })(),
                 MDY: (function () {
                     return {
-                        Numeral: function () { 
+                        Numeral: function () {
                             var date = new Date();
-                            var day = date.getDay()-1;
-                            var month = date.getMonth()+1;
-                            var year =  date.getFullYear();
-                            return month+"/"+day+"/"+year;
-                            
+                            var day = date.getDay() - 1;
+                            var month = date.getMonth() + 1;
+                            var year = date.getFullYear();
+                            return month + "/" + day + "/" + year;
+
                         },
                         Name: function () {
-                            
+
                             var date = new Date();
-                            var day = date.getDay()-1;
+                            var day = date.getDay() - 1;
                             var month = date.getMonth();
                             var monthNa = monthName[month]
-                            var year =  date.getFullYear();
-                            return monthNa+" "+day+", "+year;
-                         }
+                            var year = date.getFullYear();
+                            return monthNa + " " + day + ", " + year;
+                        }
                     }
                 })(),
             }
@@ -317,6 +325,13 @@ var library = (function () {
                 }
             }
         })(),
-        Defaults: function () { }
+        Defaults: function () {
+            var date = new Date();
+            var day = addZero(date.getDay() - 1);
+            var month = addZero(date.getMonth() + 1);
+            var year = date.getFullYear();
+            var dateWS = dateWithSecondsWithOutAMPM(date);
+            return year+"-"+month+"-"+day+"T"+dateWS;
+        }
     }
 })();
