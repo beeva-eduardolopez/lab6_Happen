@@ -91,8 +91,16 @@ var library = (function () {
         })(),
         Minute: (function () {
             return {
-                Minute: function () { },
-                DblDigit: function () { }
+                Minute: function () {
+                    var date = new Date();
+                    var minute = date.getMinutes();
+                    return String(minute);
+                },
+                DblDigit: function () {
+                    var date = new Date();
+                    var minute = date.getMinutes();
+                    return minute < 10 ? '0' + minute : '' + minute;
+                }
             }
         })(),
         Hour: (function () {
