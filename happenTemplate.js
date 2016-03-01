@@ -64,9 +64,16 @@ var library = (function() {
 				}
 			})(),
 			MonthNumber: function(){
-                return String(new Date().getMonth()+1);
+                var date = new Date();
+                var month = date.getMonth() + 1;
+                return String (month);
+                //return String(new Date().getMonth()+1);
             },
-			MonthNumberDblDigit: function(){},
+			MonthNumberDblDigit: function(){
+                var date = new Date();
+                var month = date.getMonth() + 1;
+                return month < 10 ? '0' + month : '' + month;
+            },
 			AbrOfCurrentMonth: function(){},
 			CurrentMonth: function(){}
 		}
