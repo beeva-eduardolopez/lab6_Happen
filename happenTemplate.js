@@ -47,6 +47,30 @@ function nth(d) {
 
 }
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function dateWithSeconds() {
+    var d = new Date();
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+    var ampm =  (h >= 12) ? "PM" : "AM";
+    return  h + ":" + m + ":" + s +" "+ampm;
+}
+
+function dateWithOutSeconds() {
+    var d = new Date();
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var ampm =  (h >= 12) ? "PM" : "AM";
+    return  h + ":" + m +" "+ampm;
+}
+
 Date.prototype.getWeek = function () {
     var date = new Date(this.getTime());
     date.setHours(0, 0, 0, 0);
@@ -80,14 +104,37 @@ var library = (function () {
             return {
                 Time: (function () {
                     return {
-                        WithSeconds: function () { },
-                        WithOutSeconds: function () { }
+                        WithSeconds: function () { 
+                            var date = new Date();
+                            var dateWS = dateWithSeconds(date);
+                            return String(dateWS);
+                        },
+                        WithOutSeconds: function () { 
+                            var date = new Date();
+                            var dateWOS = dateWithOutSeconds(date);
+                            return String(dateWOS);
+                        }
                     }
                 })(),
                 MDY: (function () {
                     return {
-                        Numeral: function () { },
-                        Name: function () { }
+                        Numeral: function () { 
+                            var date = new Date();
+                            var day = date.getDay()-1;
+                            var month = date.getMonth()+1;
+                            var year =  date.getFullYear();
+                            return month+"/"+day+"/"+year;
+                            
+                        },
+                        Name: function () {
+                            
+                            var date = new Date();
+                            var day = date.getDay()-1;
+                            var month = date.getMonth();
+                            var monthNa = monthName[month]
+                            var year =  date.getFullYear();
+                            return monthNa+" "+day+", "+year;
+                         }
                     }
                 })(),
             }
@@ -102,7 +149,7 @@ var library = (function () {
                 DblDigit: function () {
                     var date = new Date();
                     var seconds = date.getSeconds();
-                    return seconds < 10 ? '0' + seconds : '' + seconds;
+                    return String(addZero(seconds));
                 }
             }
         })(),
@@ -116,7 +163,7 @@ var library = (function () {
                 DblDigit: function () {
                     var date = new Date();
                     var minute = date.getMinutes();
-                    return minute < 10 ? '0' + minute : '' + minute;
+                    return String(addZero(minute));
                 }
             }
         })(),
@@ -216,7 +263,7 @@ var library = (function () {
                 MonthNumberDblDigit: function () {
                     var date = new Date();
                     var month = date.getMonth() + 1;
-                    return month < 10 ? '0' + month : '' + month;
+                    return String(addZero(month));
                 },
                 AbrOfCurrentMonth: function () {
 
