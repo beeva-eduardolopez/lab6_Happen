@@ -63,7 +63,9 @@ var library = (function() {
 					DateDblDigit: function(){}
 				}
 			})(),
-			MonthNumber: function(){},
+			MonthNumber: function(){
+                return String(new Date().getMonth()+1);
+            },
 			MonthNumberDblDigit: function(){},
 			AbrOfCurrentMonth: function(){},
 			CurrentMonth: function(){}
