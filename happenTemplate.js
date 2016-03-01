@@ -97,8 +97,22 @@ var library = (function () {
         })(),
         Hour: (function () {
             return {
-                TwentyFourHour: function () { },
-                TwelveHour: function () { },
+                TwentyFourHour: function () {
+                    var date = new Date();
+                    var hours = date.getHours();
+                    return String(hours);
+                },
+                TwelveHour: function () {
+                    var date = new Date();
+                    var hours = date.getHours();
+                    if (hours > 12) {
+                        hours -= 12;
+                    } else if (hours === 0) {
+                        hours = 12;
+                    }
+                    return String(hours);
+
+                },
                 AMPM: (function () {
                     return {
                         UpperCase: function () {
@@ -107,8 +121,8 @@ var library = (function () {
                             var ampm = (hours >= 12) ? "PM" : "AM";
                             return ampm;
                         },
-                        LowerCase: function () { 
-                             var date = new Date();
+                        LowerCase: function () {
+                            var date = new Date();
                             var hours = date.getHours();
                             var ampm = (hours >= 12) ? "pm" : "am";
                             return ampm;
