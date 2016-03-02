@@ -64,7 +64,7 @@ function dateWithSecondsWithOutAMPM() {
 
 function dateWithSeconds() {
     var d = new Date();
-    var h = addZero(d.getHours());
+    var h = (d.getHours());
     var m = addZero(d.getMinutes());
     var s = addZero(d.getSeconds());
     var ampm = (h >= 12) ? "PM" : "AM";
@@ -73,7 +73,7 @@ function dateWithSeconds() {
 
 function dateWithOutSeconds() {
     var d = new Date();
-    var h = addZero(d.getHours());
+    var h = (d.getHours());
     var m = addZero(d.getMinutes());
     var ampm = (h >= 12) ? "PM" : "AM";
     return h + ":" + m + " " + ampm;
